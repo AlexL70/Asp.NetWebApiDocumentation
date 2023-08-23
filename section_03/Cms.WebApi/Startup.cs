@@ -32,6 +32,7 @@ namespace Cms.WebApi
         {
             services.AddSingleton<ICmsRepository, InMemoryCmsRepository>();
             services.AddAutoMapper(typeof(CmsMapper));
+            services.AddSwaggerGen();
             services.AddControllers();
         }
 
@@ -44,6 +45,8 @@ namespace Cms.WebApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
 
             app.UseRouting();
 
