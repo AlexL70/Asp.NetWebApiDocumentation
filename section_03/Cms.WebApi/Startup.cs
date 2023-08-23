@@ -47,6 +47,7 @@ namespace Cms.WebApi
             app.UseHttpsRedirection();
 
             app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseRouting();
 
