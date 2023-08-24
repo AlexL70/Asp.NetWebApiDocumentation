@@ -32,7 +32,24 @@ namespace Cms.WebApi
         {
             services.AddSingleton<ICmsRepository, InMemoryCmsRepository>();
             services.AddAutoMapper(typeof(CmsMapper));
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("CMS", new OpenApiInfo
+                {
+                    Title = "CMS Open API",
+                    Version = "v1",
+                    Description = "Open API Specificaton for CMS system",
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT",
+                    },
+                    Contact = new OpenApiContact
+                    {
+                        Email = "alexander.levinson.70@gmail.com",
+                        Name = "Alex Levinson"
+                    },
+                });
+            });
             services.AddControllers();
         }
 
