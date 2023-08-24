@@ -34,7 +34,7 @@ namespace Cms.WebApi
             services.AddAutoMapper(typeof(CmsMapper));
             services.AddSwaggerGen(s =>
             {
-                s.SwaggerDoc("CMS", new OpenApiInfo
+                s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "CMS Open API",
                     Version = "v1",
