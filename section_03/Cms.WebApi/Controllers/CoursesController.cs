@@ -33,9 +33,11 @@ namespace Cms.WebApi.Controllers
         }
 
         /// <summary>
-        /// Full list of courses
+        /// Gets full list of courses
         /// </summary>
-        /// <returns>Collection of all courses in repository</returns>
+        /// <remarks>This web method returns collection of all courses available in the CMS system</remarks>
+        /// <response code="200">Successfully executed; returns a collection of CourseDto structures</response> 
+        /// <response code="500">Internal error; returns error text</response>
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {

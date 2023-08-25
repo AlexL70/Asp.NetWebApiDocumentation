@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using System.IO;
 
 [assembly: ApiController]
 namespace Cms.WebApi
@@ -32,7 +33,7 @@ namespace Cms.WebApi
         {
             services.AddSingleton<ICmsRepository, InMemoryCmsRepository>();
             services.AddAutoMapper(typeof(CmsMapper));
-            services.AddSwaggerGen(s =>
+            _ = services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
@@ -49,6 +50,8 @@ namespace Cms.WebApi
                         Name = "Alex Levinson"
                     },
                 });
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{nameof(Cms)}.{nameof(WebApi)}.xml");
+                s.IncludeXmlComments(xmlPath);
             });
             services.AddControllers();
         }
