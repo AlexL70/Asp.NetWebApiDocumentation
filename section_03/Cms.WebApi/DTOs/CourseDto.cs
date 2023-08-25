@@ -35,10 +35,22 @@ namespace Cms.WebApi.DTOs
         public COURSE_TYPE CourseType { get; set; }
     }
 
+    /// <summary>
+    /// Areas of knoledge where course belongs
+    /// </summary>
     public enum COURSE_TYPE
     {
+        /// <summary>
+        /// ENGINEERING
+        /// </summary>
         ENGINEERING,
+        /// <summary>
+        /// MEDICAL
+        /// </summary>
         MEDICAL,
+        /// <summary>
+        /// MANAGEMENT
+        /// </summary>
         MANAGEMENT
     }
 }

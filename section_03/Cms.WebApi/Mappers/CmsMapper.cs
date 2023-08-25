@@ -2,9 +2,10 @@ using AutoMapper;
 using Cms.Data.Repository.Models;
 using Cms.WebApi.DTOs;
 
+#pragma warning disable CS1591
 namespace Cms.WebApi.Mappers
 {
-    public class CmsMapper: Profile
+    public class CmsMapper : Profile
     {
         public CmsMapper()
         {
@@ -16,3 +17,4 @@ namespace Cms.WebApi.Mappers
         }
     }
 }
+#pragma warning restore CS1591

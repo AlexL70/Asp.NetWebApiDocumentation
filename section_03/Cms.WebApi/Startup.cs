@@ -1,21 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Cms.Data.Repository.Repositories;
 using Cms.WebApi.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using System.IO;
 
+#pragma warning disable CS1591
 [assembly: ApiController]
 namespace Cms.WebApi
 {
@@ -80,3 +75,4 @@ namespace Cms.WebApi
         }
     }
 }
+#pragma warning restore CS1591

@@ -54,6 +54,12 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Add new course to the system
+        /// </summary>
+        /// <param name="course">Course name</param>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public ActionResult<CourseDto> AddCourse([FromBody] CourseDto course)
         {
@@ -69,6 +75,12 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets one course by id 
+        /// </summary>
+        /// <param name="courseId">Compares to CourseId field in CourseDto</param>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{courseId}")]
         public ActionResult<CourseDto> GetCourse(int courseId)
         {
@@ -87,7 +99,14 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates course by ID
+        /// </summary>
+        /// <param name="courseId">Used to find the course</param>
+        /// <param name="course">New value of course name</param>
         [HttpPut("{courseId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CourseDto> UpdateCourse(int courseId, CourseDto course)
         {
             try
@@ -107,7 +126,13 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes course from the database
+        /// </summary>
+        /// <param name="courseId">Used to find course</param>
         [HttpDelete("{courseId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CourseDto> DeleteCourse(int courseId)
         {
             try
@@ -129,8 +154,15 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+
         // GET ../courses/1/students
+        /// <summary>
+        /// Returns list of students taking the course
+        /// </summary>
+        /// <param name="courseId">Used to find the course in DB</param>
         [HttpGet("{courseId}/students")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<IEnumerable<StudentDto>> GetStudents(int courseId)
         {
             try
@@ -149,7 +181,14 @@ namespace Cms.WebApi.Controllers
         }
 
         // POST ../courses/1/students
+        /// <summary>
+        /// Adds new student to the course
+        /// </summary>
+        /// <param name="courseId">Used to find the course in DB</param>
+        /// <param name="student">Student to add</param>
         [HttpPost("{courseId}/students")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<StudentDto> AddStudent(int courseId, StudentDto student)
         {
             try
