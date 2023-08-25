@@ -7,6 +7,7 @@ using Cms.Data.Repository.Repositories;
 using Cms.WebApi.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Cms.WebApi.Controllers
 {
@@ -36,8 +37,8 @@ namespace Cms.WebApi.Controllers
         /// Gets full list of courses
         /// </summary>
         /// <remarks>This web method returns collection of all courses available in the CMS system</remarks>
-        /// <response code="200">Successfully executed; returns a collection of CourseDto structures</response> 
-        /// <response code="500">Internal error; returns error text</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
