@@ -10,19 +10,32 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cms.WebApi.Controllers
 {
+    /// <summary>
+    /// This controller exposes methods for working with courses and maintaining
+    /// a list of students for each course.  
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class CoursesController: ControllerBase
+    public class CoursesController : ControllerBase
     {
         private readonly ICmsRepository cmsRepository;
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="cmsRepository">Courses repository</param>
+        /// <param name="mapper">Mapper</param>
         public CoursesController(ICmsRepository cmsRepository, IMapper mapper)
         {
             this.cmsRepository = cmsRepository;
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Full list of courses
+        /// </summary>
+        /// <returns>Collection of all courses in repository</returns>
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
@@ -30,7 +43,7 @@ namespace Cms.WebApi.Controllers
             {
                 IEnumerable<Course> courses = cmsRepository.GetAllCourses();
                 var result = mapper.Map<CourseDto[]>(courses);
-                return result.ToList(); 
+                return result.ToList();
             }
             catch (System.Exception ex)
             {
@@ -39,7 +52,7 @@ namespace Cms.WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CourseDto> AddCourse([FromBody]CourseDto course)
+        public ActionResult<CourseDto> AddCourse([FromBody] CourseDto course)
         {
             try
             {
@@ -58,7 +71,7 @@ namespace Cms.WebApi.Controllers
         {
             try
             {
-                if(!cmsRepository.IsCourseExists(courseId))
+                if (!cmsRepository.IsCourseExists(courseId))
                     return NotFound();
 
                 Course course = cmsRepository.GetCourse(courseId);
@@ -101,9 +114,9 @@ namespace Cms.WebApi.Controllers
 
                 Course course = cmsRepository.DeleteCourse(courseId);
 
-                if(course == null)
+                if (course == null)
                     return BadRequest();
-                    
+
                 var result = mapper.Map<CourseDto>(course);
                 return result;
             }
