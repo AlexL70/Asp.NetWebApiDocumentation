@@ -32,28 +32,6 @@ namespace Cms.WebApi
             services.AddSingleton<ICmsRepository, InMemoryCmsRepository>();
             services.AddAutoMapper(typeof(CmsMapper));
 
-            services.AddSwaggerGen(s =>
-            {
-                s.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "CMS OpenAPI",
-                    Version = "v1",
-                    Description = "OpenAPI Specification for CMS",
-                    License = new OpenApiLicense()
-                    {
-                        Name = "MIT",
-                    },
-                    Contact = new OpenApiContact()
-                    {
-                        Name = "Praveenkumar Bouna",
-                        Email = "hello@codewithpraveen.com"
-                    },
-                });
-
-                var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "Cms.WebAPI.xml");
-                s.IncludeXmlComments(xmlPath);
-            });
-            
             services.AddControllers();
         }
 
@@ -66,9 +44,6 @@ namespace Cms.WebApi
             }
 
             app.UseHttpsRedirection();
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
 
             app.UseRouting();
 
