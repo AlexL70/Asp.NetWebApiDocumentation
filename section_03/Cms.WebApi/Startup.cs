@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 #pragma warning disable CS1591
 [assembly: ApiController]
@@ -48,7 +49,11 @@ namespace Cms.WebApi
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{nameof(Cms)}.{nameof(WebApi)}.xml");
                 s.IncludeXmlComments(xmlPath);
             });
-            services.AddControllers();
+
+            services.AddControllers(c =>
+            {
+                c.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

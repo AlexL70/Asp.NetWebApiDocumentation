@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Cms.Data.Repository.Models;
 using Cms.Data.Repository.Repositories;
 using Cms.WebApi.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Cms.WebApi.Controllers
 {
@@ -38,7 +36,6 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <remarks>This web method returns collection of all courses available in the CMS system</remarks>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
@@ -59,7 +56,6 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <param name="course">Course name</param>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public ActionResult<CourseDto> AddCourse([FromBody] CourseDto course)
         {
@@ -80,7 +76,8 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <param name="courseId">Compares to CourseId field in CourseDto</param>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{courseId}")]
         public ActionResult<CourseDto> GetCourse(int courseId)
         {
@@ -106,7 +103,7 @@ namespace Cms.WebApi.Controllers
         /// <param name="course">New value of course name</param>
         [HttpPut("{courseId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CourseDto> UpdateCourse(int courseId, CourseDto course)
         {
             try
@@ -132,7 +129,8 @@ namespace Cms.WebApi.Controllers
         /// <param name="courseId">Used to find course</param>
         [HttpDelete("{courseId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CourseDto> DeleteCourse(int courseId)
         {
             try
@@ -162,7 +160,7 @@ namespace Cms.WebApi.Controllers
         /// <param name="courseId">Used to find the course in DB</param>
         [HttpGet("{courseId}/students")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<StudentDto>> GetStudents(int courseId)
         {
             try
@@ -187,8 +185,8 @@ namespace Cms.WebApi.Controllers
         /// <param name="courseId">Used to find the course in DB</param>
         /// <param name="student">Student to add</param>
         [HttpPost("{courseId}/students")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<StudentDto> AddStudent(int courseId, StudentDto student)
         {
             try
