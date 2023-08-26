@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 #pragma warning disable CS1591
 
@@ -32,6 +31,27 @@ namespace Cms.WebApi
             services.AddSingleton<ICmsRepository, InMemoryCmsRepository>();
             services.AddAutoMapper(typeof(CmsMapper));
 
+            services.AddOpenApiDocument(c =>
+            {
+                c.DocumentName = "v1";
+                c.PostProcess = d =>
+                {
+                    d.Info.Version = "v1";
+                    d.Info.Title = "CMS Open API";
+                    d.Info.Description = "Open API specification for the CMS";
+                    d.Info.License = new NSwag.OpenApiLicense
+                    {
+                        Name = "MIT",
+                        Url = "https://opensource.org/license/mit/",
+                    };
+                    d.Info.Contact = new NSwag.OpenApiContact
+                    {
+                        Name = "Alex Levinson",
+                        Email = "alexander.levinson.70@gmail.com",
+                    };
+                };
+            });
+
             services.AddControllers();
         }
 
@@ -44,6 +64,8 @@ namespace Cms.WebApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseOpenApi();
 
             app.UseRouting();
 
