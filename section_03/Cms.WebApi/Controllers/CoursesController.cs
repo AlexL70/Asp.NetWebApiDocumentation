@@ -57,7 +57,7 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <param name="course">Course name</param>
         [HttpPost]
-        public ActionResult<CourseDto> AddCourse([FromBody] CourseDto course)
+        public ActionResult<CourseDto> CreateCourse([FromBody] CourseDto course)
         {
             try
             {
