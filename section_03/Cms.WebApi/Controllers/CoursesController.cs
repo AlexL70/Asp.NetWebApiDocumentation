@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using AutoMapper;
 using Cms.Data.Repository.Models;
@@ -15,6 +16,7 @@ namespace Cms.WebApi.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class CoursesController : ControllerBase
     {
         private readonly ICmsRepository cmsRepository;
@@ -35,7 +37,6 @@ namespace Cms.WebApi.Controllers
         /// Gets full list of courses
         /// </summary>
         /// <remarks>This web method returns collection of all courses available in the CMS system</remarks>
-        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
@@ -55,7 +56,6 @@ namespace Cms.WebApi.Controllers
         /// Add new course to the system
         /// </summary>
         /// <param name="course">Course name</param>
-        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         public ActionResult<CourseDto> AddCourse([FromBody] CourseDto course)
         {
@@ -75,10 +75,8 @@ namespace Cms.WebApi.Controllers
         /// Gets one course by id 
         /// </summary>
         /// <param name="courseId">Compares to CourseId field in CourseDto</param>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{courseId}")]
+        //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         public ActionResult<CourseDto> GetCourse(int courseId)
         {
             try
@@ -102,8 +100,6 @@ namespace Cms.WebApi.Controllers
         /// <param name="courseId">Used to find the course</param>
         /// <param name="course">New value of course name</param>
         [HttpPut("{courseId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CourseDto> UpdateCourse(int courseId, CourseDto course)
         {
             try
@@ -128,9 +124,6 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <param name="courseId">Used to find course</param>
         [HttpDelete("{courseId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CourseDto> DeleteCourse(int courseId)
         {
             try
@@ -159,8 +152,6 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <param name="courseId">Used to find the course in DB</param>
         [HttpGet("{courseId}/students")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<StudentDto>> GetStudents(int courseId)
         {
             try
@@ -185,8 +176,6 @@ namespace Cms.WebApi.Controllers
         /// <param name="courseId">Used to find the course in DB</param>
         /// <param name="student">Student to add</param>
         [HttpPost("{courseId}/students")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<StudentDto> AddStudent(int courseId, StudentDto student)
         {
             try

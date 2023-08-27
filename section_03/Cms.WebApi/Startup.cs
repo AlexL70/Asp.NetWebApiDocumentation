@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 
 #pragma warning disable CS1591
 [assembly: ApiController]
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 namespace Cms.WebApi
 {
     public class Startup
@@ -50,10 +51,11 @@ namespace Cms.WebApi
                 s.IncludeXmlComments(xmlPath);
             });
 
-            services.AddControllers(c =>
-            {
-                c.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
-            });
+            services.AddControllers();
+            //services.AddControllers(c =>
+            //{
+            //    c.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
