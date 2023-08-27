@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using Cms.Data.Repository.Models;
 using Cms.Data.Repository.Repositories;
+using Cms.WebApi.Conventions;
 using Cms.WebApi.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,8 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <remarks>This web method returns collection of all courses available in the CMS system</remarks>
         [HttpGet]
-        public ActionResult<IEnumerable<CourseDto>> GetCourses()
+        [ApiConventionMethod(typeof(CmsApiConventions), nameof(CmsApiConventions.GetAll))]
+        public ActionResult<IEnumerable<CourseDto>> GetAllCourses()
         {
             try
             {
