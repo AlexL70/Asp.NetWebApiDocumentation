@@ -51,11 +51,15 @@ namespace Cms.WebApi
                 s.IncludeXmlComments(xmlPath);
             });
 
-            services.AddControllers();
-            //services.AddControllers(c =>
-            //{
-            //    c.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
-            //});
+            services.AddControllers(c =>
+            {
+                //    c.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+            });
+            services.AddApiVersioning(setupAction =>
+            {
+                setupAction.AssumeDefaultVersionWhenUnspecified = true;
+                setupAction.DefaultApiVersion = new ApiVersion(1, 0);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

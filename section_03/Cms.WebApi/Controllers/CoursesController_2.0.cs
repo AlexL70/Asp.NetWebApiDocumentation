@@ -16,10 +16,10 @@ namespace Cms.WebApi.Controllers
     /// a list of students for each course.  
     /// </summary>
     [ApiController]
-    [Route("v{version:apiVersion}/[controller]")]
+    [Route("v{version:apiVersion}/courses")]
     [ApiConventionType(typeof(DefaultApiConventions))]
-    [ApiVersion("1.0")]
-    public class CoursesController : ControllerBase
+    [ApiVersion("2.0")]
+    public class CoursesController_2_0 : ControllerBase
     {
         private readonly ICmsRepository cmsRepository;
         private readonly IMapper mapper;
@@ -29,7 +29,7 @@ namespace Cms.WebApi.Controllers
         /// </summary>
         /// <param name="cmsRepository">Courses repository</param>
         /// <param name="mapper">Mapper</param>
-        public CoursesController(ICmsRepository cmsRepository, IMapper mapper)
+        public CoursesController_2_0(ICmsRepository cmsRepository, IMapper mapper)
         {
             this.cmsRepository = cmsRepository;
             this.mapper = mapper;
