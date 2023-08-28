@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using AutoMapper;
 using Cms.Data.Repository.Models;
@@ -19,6 +18,7 @@ namespace Cms.WebApi.Controllers
     [Route("v{version:apiVersion}/[controller]")]
     [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiVersion("1.0")]
+    [ApiExplorerSettings(GroupName = "v1")]
     public class CoursesController : ControllerBase
     {
         private readonly ICmsRepository cmsRepository;

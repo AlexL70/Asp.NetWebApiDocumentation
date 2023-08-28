@@ -4,12 +4,12 @@ using Cms.WebApi.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.IO;
-using Microsoft.AspNetCore.Http;
 
 #pragma warning disable CS1591
 [assembly: ApiController]
@@ -55,10 +55,14 @@ namespace Cms.WebApi
             {
                 //    c.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
             });
-            services.AddApiVersioning(setupAction =>
+            services.AddApiVersioning(opt =>
             {
-                setupAction.AssumeDefaultVersionWhenUnspecified = true;
-                setupAction.DefaultApiVersion = new ApiVersion(1, 0);
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.DefaultApiVersion = new ApiVersion(1, 0);
+            });
+            services.AddVersionedApiExplorer(opt =>
+            {
+                opt.SubstituteApiVersionInUrl = true;
             });
         }
 
