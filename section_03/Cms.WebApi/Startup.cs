@@ -47,6 +47,21 @@ namespace Cms.WebApi
                         Name = "Alex Levinson"
                     },
                 });
+                s.SwaggerDoc("v2", new OpenApiInfo
+                {
+                    Title = "CMS Open API",
+                    Version = "v2",
+                    Description = "Open API Specificaton for CMS system",
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT",
+                    },
+                    Contact = new OpenApiContact
+                    {
+                        Email = "alexander.levinson.70@gmail.com",
+                        Name = "Alex Levinson"
+                    },
+                });
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{nameof(Cms)}.{nameof(WebApi)}.xml");
                 s.IncludeXmlComments(xmlPath);
             });
@@ -77,7 +92,11 @@ namespace Cms.WebApi
             app.UseHttpsRedirection();
 
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(act =>
+            {
+                act.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                act.SwaggerEndpoint("/swagger/v2/swagger.json", "v2");
+            });
 
             app.UseRouting();
 
